@@ -1,0 +1,33 @@
+/*Faça um programa que recebe nomes de frutas e seu pre¸co. A quantidade frutas deve ser informada
+pelo o usu´ario. Utilize aloca¸c˜ao dinˆamica, especialmente a fun¸c˜ao realloc para n˜ao desperdi¸car
+memória.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int qntd, i;
+    printf("Digite a quantidade de frutas: ");
+    scanf("%d", &qntd);
+    char **fruta=(char**)malloc(qntd*sizeof(char*));
+    if(fruta==NULL){
+        printf("Erro");
+        exit(1);
+    }
+    for(i=0;i<qntd;i++){
+        fruta[i]=(char*)malloc(50*sizeof(char));
+    }
+    float *preco=(float*)malloc(qntd*sizeof(float));
+    if(preco==NULL){
+        printf("Erro");
+        exit(1);
+    }
+    printf("Digite a lista de frutas e seus valores:\n");
+    for(i=0;i<qntd;i++){
+        scanf("%[^\n]s", fruta[i]);
+        scanf("%f", &preco[i]);
+    }
+    free(fruta[i]);
+	free(preco);
+    return(0);
+}
