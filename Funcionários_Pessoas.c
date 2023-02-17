@@ -19,6 +19,7 @@ typedef struct funcionario{
 	char cargo[50];
 }Funcionario;
 
+//função que preenche variáveis dentro de uma struct;
 void preencher(Funcionario *preenche, int qtd){
 	for(int i = 0; i < qtd; i++){
 	printf("Informe o nome do funcionario: ");
@@ -29,15 +30,15 @@ void preencher(Funcionario *preenche, int qtd){
 	scanf("%d", &preenche[i].identificador);
 	printf("Informe o cargo: ");
 	scanf(" %[^\n]s", preenche[i].cargo);
-	
-	printf("Nome do funcionario e %s, seu salario e de %.1f, o identificador e %d, com cargo de %s \n", preenche[i].nome, preenche[i].salario, preenche[i].identificador, preenche[i].cargo);
-}
+	printf("Nome do funcionario: %s.\n Salario: %.1f.\n Identificador: %d.\n Cargo: %s\n", preenche[i].nome, preenche[i].salario, preenche[i].identificador, preenche[i].cargo);
 }
 
+//função que altera salário do funcionário;
 float altera (Funcionario * altera, int indice){
 	altera[indice].salario += 1000;
 }
 
+//função que compara os salários dos funcionários e dá o maior e menor com os respectivos nomes;
 void maior_menor(Funcionario * mem, int qtd){
  float	menor = 0, maior = 0;
  int indice_maior, indice_menor;
@@ -97,81 +98,58 @@ typedef struct pessoa
     int idade;
 
 } Pessoa;
-
-void preenche(Pessoa *i)
-{
-
-    int cont;
-    for (cont = 0; cont < 4; cont++)
-    {
-
-        printf("\n");
-        printf("\nDados da pessoa (%d)\n\n", cont + 1);
-        printf("Digite o nome: ");
-        scanf(" %[^\n]", i[cont].nome);
-
-        printf("Digite o numero do documento: ");
-        scanf("%d", &i[cont].numerododoc);
-
-        printf("Digite a idade: ");
-        scanf("%d", &i[cont].idade);
+	
+//função que preenche as variáveis dentro da struct;
+void preenche(Pessoa *i){
+int cont;
+	for (cont = 0; cont < 4; cont++){
+	printf("\n");
+	printf("\nDados da pessoa (%d)\n\n", cont + 1);
+	printf("Digite o nome: ");
+	scanf(" %[^\n]", i[cont].nome);
+	printf("Digite o numero do documento: ");
+	scanf("%d", &i[cont].numerododoc);
+	printf("Digite a idade: ");
+	scanf("%d", &i[cont].idade);
     }
 }
 
-void imprimir(Pessoa *i)
-{
-
-    int cont;
-    for (cont = 0; cont < 4; cont++)
-    {
-
+//função que imprime o conteúdo das variáveis dentro da struct;
+void imprimir(Pessoa *i){
+	int cont;
+	for (cont = 0; cont < 4; cont++){
         printf("\n");
         printf("\nDados da pessoa (%d)\n\n", cont + 1);
         printf("nome do funcionario: %s\n", i[cont].nome);
-
         printf("Numero do documento: %d\n", i[cont].numerododoc);
-
         printf("Idade da pessoa: %d\n", i[cont].idade);
-    }
+	}
 }
 
-void alteraidade(Pessoa *i, int valor)
-{
-
+//função que altera a idade(conteúdo de uma variável dentro da struct);
+void alteraidade(Pessoa *i, int valor){
     int cont;
-
-    for (cont = 0; cont < 4; cont++)
-    {
-
-        if (valor == i[cont].numerododoc)
-            printf("Atualize a idade da pessoa: ");
-        scanf("%d", &i[cont].idade);
+    for (cont = 0; cont < 4; cont++){
+        if (valor == i[cont].numerododoc){
+        	printf("Atualize a idade da pessoa: ");
+        	scanf("%d", &i[cont].idade);
     }
 }
 
-void maioremenor(Pessoa *i)
-{
-
+//função que compara as idades e imprime a maior e a menor com os respectivos nomes;
+void maioremenor(Pessoa *i){
     int menor = i[0].idade;
     int maior = i[0].idade;
-
     char nomemaior[100];
     char nomemenor[100];
-
     strcpy(nomemaior, i[0].nome);
     strcpy(nomemenor, i[0].nome);
-
-    for (int cont = 1; cont < 4; cont++)
-    {
-
-        if (i[cont].idade > maior)
-        {
+    for (int cont = 1; cont < 4; cont++){
+        if (i[cont].idade > maior){
             strcpy(nomemaior, i[cont].nome);
             maior = i[cont].idade;
         }
-
-        if (i[cont].idade < menor)
-        {
+        if (i[cont].idade < menor){
             strcpy(nomemenor, i[cont].nome);
             menor = i[cont].idade;
         }
@@ -181,24 +159,17 @@ void maioremenor(Pessoa *i)
     printf("Pessoa mais nova encontrada idade: %d nome: %s\n", menor, nomemenor);
 }
 
-int main(void)
-{
-
-    Pessoa *n1 = (Pessoa *)malloc(4 * sizeof(Pessoa));
-    int n2;
-    int valor;
-
-    preenche(n1);
-    imprimir(n1);
-
-    printf("\n");
-
-    printf("alterar idade de alguma pessoa? (1) sim ou (2) nao\n");
-    scanf("%d", &n2);
-
-    if (n2 == 1)
-    {
-        printf("Digite o numero do documento da pessoa em questao: ");
-        scanf("%d", &valor);
-
-        alteraidade(n1, valor);
+int main(void){
+	Pessoa *n1 = (Pessoa *)malloc(4 * sizeof(Pessoa));
+	int n2;
+	int valor;
+	preenche(n1);
+	imprimir(n1);
+	printf("\n");
+	printf("Alterar idade de alguma pessoa? (1) sim ou (2) nao\n");
+	scanf("%d", &n2);
+	if (n2 == 1){
+		printf("Digite o numero do documento da pessoa em questao: ");
+		scanf("%d", &valor);
+		alteraidade(n1, valor);
+	}
