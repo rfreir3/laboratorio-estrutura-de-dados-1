@@ -35,29 +35,32 @@ Turma* cria_turma(char id){
 	}
 }
 
-void matricula_aluno(Turma** turmas, int mat, char* nome){
+void matricula_aluno(Turma* turmas, int mat, char* nome){
 	int i, j;
 	Aluno** alunos;
-	alunos=(Aluno**)malloc(MAX_VAGAS*sizeof(Aluno*));
-	for(i=0;i<MAX_TURMAS;i++){
-		if(turmas[i]==NULL){
-			for(j=0;j<MAX_VAGAS;j++){
-				printf("Turmas cheias");
-				exit(1);	
-			}
+	for(i=0;i<MAX_VAGAS;i++){
+		if(i<0||i>=MAX_VAGAS){
+			printf("Turmas cheias");
+			exit(1);	
 		}
-		else{
+		else if(turmas[i].alunos==NULL){
+			alunos=(Aluno**)malloc(MAX_VAGAS*sizeof(Aluno*));
 			printf("Digite o nome do %dº aluno: ", i+1);
-				scanf(" %[^\n]", turmas[i]->alunos[i]->nome[i]);
-				printf("Digite o número da matrícula do %dº aluno: ", i+1);
-				scanf("%d", &turmas[i]->alunos[i]->mat);
+			scanf(" %[^\n]s", turmas[i].alunos[i]->nome[i]);
+			printf("Digite o número da matrícula do %dº aluno: ", i+1);
+			scanf("%d", &turmas[i].alunos[i]->mat);
 		}
-	}	
+	}
 }
 
-void lanca_notas(Turma turmas){
-	
-}
+/*void lanca_notas(Turma* turmas){
+	int i;
+	for(i=0;i<MAX_VAGAS;i++){
+		printf("Digite a %dª nota: ", i+1);
+		scanf("%f", turmas[i].alunos[i]->notas[i]);
+		
+	}
+}*/
 
 int main(){
 	setlocale(LC_ALL, "Portuguese");
@@ -67,7 +70,7 @@ int main(){
 	int mat;
 	inicializa(&turmas);
 	cria_turma(id);
-	matricula_aluno(&turmas, mat, nome);
-	lanca_turmas(&turmas);
+	matricula_aluno(turmas, mat, nome);
+	//lanca_turmas(turmas);
 	return(0);
 }
