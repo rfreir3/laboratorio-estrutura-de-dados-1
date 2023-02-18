@@ -1,4 +1,4 @@
-/*Aloque dinamicamente uma matriz de inteiros 3x3 e preencha cada elemento da matriz com o seu
+/*Q2-Aloque dinamicamente uma matriz de inteiros 3x3 e preencha cada elemento da matriz com o seu
 respectivo ´ındice (matriz[i][j] = i*3 + j). Em seguida, imprima a matriz.*/
 
 #include <stdio.h>
