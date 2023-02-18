@@ -13,5 +13,6 @@ int main(){
     }
     //==========================================
     //preenchendo vetor com seu índice;
+    free(vet);//liberando espaço da memória.
     return(0);
 }
