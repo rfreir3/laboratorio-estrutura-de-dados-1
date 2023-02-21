@@ -13,6 +13,7 @@ int main(){
     }
     //============================================
     //alocando vetores que são guardados dentro dos vetores que correspondem as linhas da matriz(os quais correspondem as colunas da matriz);
+    
     for(int i=0;i<linha;i++){
         for(int j=0;j<coluna;j++){
             M[i][j]=i*3+j;
@@ -27,8 +28,10 @@ int main(){
     }
     //=======================
     //liberando espaços da memória das colunas dentro das linhas;
+    
     free(M);
     //======
     //liberando linhas;
+    
     return(0);
 }
