@@ -65,17 +65,22 @@ int main (){
 	printf("Informe a quantidade de funcionarios: ");
 	scanf ("%i", &quantidade);
 
-	Funcionario * empresa = (Funcionario*) malloc (quantidade*sizeof(Funcionario) );
+	Funcionario * empresa = (Funcionario*) malloc (quantidade*sizeof(Funcionario)); 
+	//=============================================================================
+	//alocação dinamica do vetor "empresa" do tipo "Funcionario";
+	
 	if(empresa == NULL){
 		exit (1);
 	}
+	//==================
+	//caso "empresa" seja igual a nulo, a alocação de memória foi mal-sucedida e o programa será fechado;
 	
 	preencher(empresa, quantidade);
 	altera(empresa, 0);
 	maior_menor(empresa, quantidade);
 	
 	
-	return 0;
+	return (0);
 }
 
 /*2. Crie um tipo estruturado para armazenar dados de uma pessoa. Uma estrutura deste tipo possui os
