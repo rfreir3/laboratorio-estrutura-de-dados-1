@@ -1,3 +1,5 @@
+/*O programa a seguir apresenta alguns erros, os quais não consegui resolver. Acredito que algumas coisas estão corretas, por isso decidi colocar aqui*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -27,6 +29,7 @@ Turma* cria_turma(char id){ //Função para criar turmas:
     }
   //====================================================================
   //verifica se a alocação do vetor "turmas" foi bem sucedido;
+	
 	printf("Digite um id para a turma: ");
 	scanf("%s", &turmas->id);
     turmas->vagas = 0; //<-inicializa a variável "vagas" da struct "Turma" com 0;
@@ -40,24 +43,29 @@ Turma* cria_turma(char id){ //Função para criar turmas:
 void matricula_aluno(Turma* turmas, int mat, char* nome){ //função que matricula aluno numa turma;
     int i;
 	if (turmas->vagas < MAX_VAGAS){
-        Aluno* alunos = (Aluno*) malloc(sizeof(Aluno));
-        if (alunos == NULL) {
-            printf("Erro: não foi possível alocar memória para o aluno.\n");
-            exit(1);
-        }
-  //========================================================================
-  //verifica se a alocação do vetor "turmas" foi bem sucedido;
-    	  alunos->mat = mat;
-		    strcpy(alunos->nome, nome);
-        alunos->notas[0] = 0;
-        alunos->notas[1] = 0;
-        alunos->notas[2] = 0;
-  //===============================  
-  //insere os dados do aluno indicada pelo usuário nas variáveis da struct "Aluno";
-        turmas->alunos[turmas->vagas] = alunos; //armazena os dados do aluno na posição "turmas->vagas" dentro do vetor de alunos (que está dentro de "turmas");
-        turmas->vagas++; //indica que uma vaga da turma foi preenchida;
-        printf("Aluno %s matriculado na turma %c com sucesso!\n", alunos->nome, turmas->id);
-	}
+		Aluno* alunos = (Aluno*) malloc(sizeof(Aluno));
+		if (alunos == NULL) {
+		    printf("Erro: não foi possível alocar memória para o aluno.\n");
+		    exit(1);
+		}
+		//========================================================================
+		//verifica se a alocação do vetor "turmas" foi bem sucedido;
+    	
+		alunos->mat = mat;
+		strcpy(alunos->nome, nome);
+		alunos->notas[0] = 0;
+		alunos->notas[1] = 0;
+		alunos->notas[2] = 0;
+	  	//===============================  
+	  	//insere os dados do aluno indicada pelo usuário nas variáveis da struct "Aluno";
+
+		turmas->alunos[turmas->vagas] = alunos; 
+		//=====================================
+		//armazena os dados do aluno na posição "turmas->vagas" dentro do vetor de alunos (que está dentro de "turmas");
+
+		turmas->vagas++; //indica que uma vaga da turma foi preenchida;
+		printf("Aluno %s matriculado na turma %c com sucesso!\n", alunos->nome, turmas->id);
+		}
 	else{
     	printf("Erro: não há vagas disponíveis na turma %c.\n", turmas->id);
     }
@@ -73,19 +81,69 @@ Turma* procura_turma(Turma** turmas, int n, char id){ //função que busca uma t
     }
     //======================================
     //verifica se a turma foi encontrada, retornando-a;
-    printf("Turma não encontrada.\n");
+    
+	printf("Turma não encontrada.\n");
     return NULL;
 }
 
-/*void lanca_notas(Turma* turmas){
+void lanca_notas(Turma* turmas){ //função que armazena as notas de um aluno e armazena nas variaveis do tipo "Aluno";
 	int i;
 	for(i=0;i<MAX_VAGAS;i++){
-		printf("Digite a %dª nota: ", i+1);
-		scanf("%f", turmas[i].alunos[i]->notas[i]);
+		printf("Digite as três notas do %d aluno: ", i+1);
+		scanf("%f", &turmas->alunos[i]->notas[0]);
+		scanf("%f", &turmas->alunos[i]->notas[1]);
+		scanf("%f", &turmas->alunos[i]->notas[2]);
+		//=========================================
+		//lê as notas, armazenando-as no vetor "notas" do tipo "Aluno";
+		
+		turmas->alunos[i]->media=(turmas->alunos[i]->notas[0] + turmas->alunos[i]->notas[1] + turmas->alunos[i]->notas[2])/3; 
+		//===================================================================================================================
+		//calcula média, armazenando-a na variável "media" do tipo "Aluno";
+		printf("Média: %f", turmas->alunos[i]->media); //imprime a média;
 		
 	}
-}*/
+}
 
+void imprime_aluno(Turma* turmas){ //função que imprime todas as informações sobre os alunos de uma determinada turma;
+	int i, j;
+	char id;
+	printf("Digite o id da turma que deseja consultar: ");
+	scanf("%s", &id);
+	for(i=0;i<MAX_VAGAS;i++){
+		if(turmas->id==id){ //compara se o id acessado no vetor "turmas" corresponde ao id digitado pelo usuário;
+			printf("Listando alunos...\n");
+			printf("Aluno %d:\n", i++);
+			for(j=0;j<81;j++){
+				printf("Nome: ", turmas->alunos[i]->nome);
+			}
+			//================================================
+			//imprime o nome do(s) aluno(s) matriculado
+
+			printf("Número de matrícula: ", turmas->alunos[i]->mat);
+			printf("Média: ", turmas->alunos[i]->media);
+			//======================================================
+			//imprime as outras informações dos alunos;
+		}
+	}
+}
+
+void imprime_turma(Turma** turmas){ //função que imprime as informações de determinada uma turma;
+	int i;
+	char id;
+	Aluno** alunos;
+	printf("Digite o id da turma que deseja verificar: ");
+	scanf("%s", &id);
+	for(i=0;i<MAX_TURMAS;i++){
+		if(turmas[i]->id==id){ //compara se o id acessado no vetor "turmas" corresponde ao id digitado pelo usuário;
+			printf("Turma %c:\n", turmas->id);
+			printf("Alunos matriculados: %s\n", turmas[i]->alunos[i]->nome);
+			printf("Vagas: %d\n", turmas[i]->vagas);
+			//==============================================================
+			//imprimindo informações da turma;
+		}
+	}
+}
+	
 int main(){
 	setlocale(LC_ALL, "Portuguese");
 	Turma* turmas;
@@ -115,7 +173,19 @@ int main(){
 				procura_turma(&turmas, MAX_TURMAS, id);
 				break;
 			case 4:
-				//lanca_notas(turmas);
+				lanca_notas(turmas);
+				break;
+			case 5:
+				imprime_aluno(turmas);
+				break;
+			case 6:
+				imprime_turma(&turmas);
+				break;
+			case 7:
+				printf("Obrigado por usar esse programa!");
+				exit(1);
+			default:
+				printf("Opção invalida!");
 				break;
 		}
 		printf("Deseja continuar? [S/N]");  
