@@ -117,7 +117,7 @@ void imprime_aluno(Turma* turmas){ //função que imprime todas as informações
 				printf("Nome: ", turmas->alunos[i]->nome);
 			}
 			//================================================
-			//imprime o nome do(s) aluno(s) matriculado
+			//imprime o nome do aluno matriculado;
 
 			printf("Número de matrícula: ", turmas->alunos[i]->mat);
 			printf("Média: ", turmas->alunos[i]->media);
@@ -135,10 +135,9 @@ void imprime_turma(Turma** turmas){ //função que imprime as informações de d
 	scanf("%s", &id);
 	for(i=0;i<MAX_TURMAS;i++){
 		if(turmas[i]->id==id){ //compara se o id acessado no vetor "turmas" corresponde ao id digitado pelo usuário;
-			printf("Turma %c:\n", turmas->id);
-			printf("Alunos matriculados: %s\n", turmas[i]->alunos[i]->nome);
+			printf("Turma %c:\n", turmas[i]->id);
 			printf("Vagas: %d\n", turmas[i]->vagas);
-			//==============================================================
+			//======================================
 			//imprimindo informações da turma;
 		}
 	}
@@ -153,7 +152,7 @@ int main(){
 	printf("Bem-vindo ao Programa de Gerenciamento de Turmas!\n");
 	printf("Este programa gerencia as turmas ofertadas,\nfornecendo as funcionalidades de matricula, lançamento de notas e listagem de alunos.\nAutor: Rafael Freire\t\tVersao: 1.0\n");
 	do{
-		printf("\nMENU:\n1 – Criar turma\n2 – Matricular aluno\n3 – Consultar turma\n4 – Lançar notas\n5 – Listar alunos\n6 – Sair\n");
+		printf("\nMENU:\n1 – Criar turma\n2 – Matricular aluno\n3 – Consultar turma\n4 – Lançar notas\n5 – Listar alunos\n6 – Listar turmas\n7 - Sair\n");
 		printf("Digite sua opcao: ");
 		scanf("%d", &op);
 		switch(op){ //laço de repetição para que o programa continue sendo executado enquanto o usuário não digitar um caractere diferente de "S" ou "s";
