@@ -19,8 +19,8 @@ typedef struct funcionario{
 	char cargo[50];
 }Funcionario;
 
-//função que preenche variáveis dentro de uma struct;
-void preencher(Funcionario *preenche, int qtd){
+
+void preencher(Funcionario *preenche, int qtd){  //função que preenche variáveis dentro de uma struct por meio do vetor "preenche" do tipo "Funcionario";
 	for(int i = 0; i < qtd; i++){
 	printf("Informe o nome do funcionario: ");
 	scanf(" %[^\n]s", preenche[i].nome);
@@ -31,15 +31,16 @@ void preencher(Funcionario *preenche, int qtd){
 	printf("Informe o cargo: ");
 	scanf(" %[^\n]s", preenche[i].cargo);
 	printf("Nome do funcionario: %s.\n Salario: %.1f.\n Identificador: %d.\n Cargo: %s\n", preenche[i].nome, preenche[i].salario, preenche[i].identificador, preenche[i].cargo);
+	
 }
 
-//função que altera salário do funcionário;
-float altera (Funcionario * altera, int indice){
+
+float altera (Funcionario * altera, int indice){  //função que altera salário do funcionário;
 	altera[indice].salario += 1000;
 }
 
-//função que compara os salários dos funcionários e dá o maior e menor com os respectivos nomes;
-void maior_menor(Funcionario * mem, int qtd){
+
+void maior_menor(Funcionario * mem, int qtd){  //função que compara os salários dos funcionários e imprime o maior e menor com os respectivos nomes;
  float	menor = 0, maior = 0;
  int indice_maior, indice_menor;
 	for(int i = 0; i < qtd; i++){
@@ -48,11 +49,11 @@ void maior_menor(Funcionario * mem, int qtd){
 		}
 		else if(mem[i].salario > maior){
 			maior = mem[i].salario;
-			indice_maior = i;
+			indice_maior = i; //indice usado para acessar o nome do funcionário com maior salário;
 		} 
 		else if(mem[i].salario < menor){
 			menor = mem[i].salario;
-			indice_menor = i;
+			indice_menor = i; //indice usado para acessar o nome do funcionário com maior salário;
 		} 
 	}
 	printf("O funcionario com maior salario e %s, com salario de %.1f", mem[indice_maior].nome, mem[indice_maior].salario);
@@ -126,7 +127,7 @@ void imprimir(Pessoa *i){
 	}
 }
 
-//função que altera a idade(conteúdo de uma variável dentro da struct);
+//função que altera a idade(conteúdo de uma variável dentro da struct), caso o usuário deseje;
 void alteraidade(Pessoa *i, int valor){
     int cont;
     for (cont = 0; cont < 4; cont++){
@@ -146,21 +147,29 @@ void maioremenor(Pessoa *i){
     strcpy(nomemenor, i[0].nome);
     for (int cont = 1; cont < 4; cont++){
         if (i[cont].idade > maior){
-            strcpy(nomemaior, i[cont].nome);
-            maior = i[cont].idade;
+	//=========================
+	//compara o conteúdo da variável "maior" com o conteúdo da variável "idade" dentro do vetor "i" do tipo "Pessoa";
+	
+        //se a condição for verdadeira:
+		strcpy(nomemaior, i[cont].nome); //copia a string dentro de "i[cont].nome" para a variável "nomemaior";
+        	maior = i[cont].idade; //variável "maior" recebe o conteúdo de "i[cont].idade";
         }
         if (i[cont].idade < menor){
-            strcpy(nomemenor, i[cont].nome);
-            menor = i[cont].idade;
+	//=========================
+	//compara o conteúdo da variável "menor" com o conteúdo da variável "idade" dentro do vetor "i" do tipo "Pessoa";
+	
+	//se a condição for verdadeira:
+        	strcpy(nomemenor, i[cont].nome); //copia a string dentro de "i[cont].nome" para a variável "nomemenor";
+        	menor = i[cont].idade; //variável "menor" recebe o conteúdo de "i[cont].idade";
         }
     }
 
-    printf("Pessoa mais velha encontrada idade: %d nome: %s\n", maior, nomemaior);
-    printf("Pessoa mais nova encontrada idade: %d nome: %s\n", menor, nomemenor);
+    printf("Pessoa mais velha encontrada idade: %d nome: %s\n", maior, nomemaior); //imprime maior idade com seu respectivo nome;
+    printf("Pessoa mais nova encontrada idade: %d nome: %s\n", menor, nomemenor); //imprime menor idade com seu respectivo nome;
 }
 
 int main(void){
-	Pessoa *n1 = (Pessoa *)malloc(4 * sizeof(Pessoa));
+	Pessoa *n1 = (Pessoa *)malloc(4 * sizeof(Pessoa)); //alocando dinamicamente o vetor "n1" do tipo "Pessoa";
 	int n2;
 	int valor;
 	preenche(n1);
@@ -173,3 +182,5 @@ int main(void){
 		scanf("%d", &valor);
 		alteraidade(n1, valor);
 	}
+	return (0);
+}
